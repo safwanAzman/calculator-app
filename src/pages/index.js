@@ -14,8 +14,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main  className="h-screen bg-black flex items-center justify-center ">
-        <h1 className="text-4xl text-white font-bold">CALCULATOR APP</h1>
+      <main  className="h-screen bg-bgTheme1-mainBg flex items-center justify-center ">
+        <h1 className="text-2xl text-white font-bold myFont">CALCULATOR APP SOON...</h1>
       </main> 
     </>
   )
