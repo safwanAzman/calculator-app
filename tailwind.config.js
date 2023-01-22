@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        '3xl': '0px 5px 5px rgba(0, 0, 0, 0.3)',
+      },
       colors: {
 
         bgTheme1: {
@@ -26,6 +29,7 @@ module.exports = {
         textTheme1: {
           text1:"#444B5A",//Very dark grayish blue
           text2:"#FFFFFF",//white
+          text3:"#FFFFFF",//white
         },
 
         bgTheme2: {
@@ -44,6 +48,7 @@ module.exports = {
         textTheme2: {
           text1:"#35352C",//Very dark grayish yellow
           text2:"#FFFFFF",//white
+          text3:"#35352C",//Very dark grayish yellow
         },
 
         bgTheme3: {
@@ -60,11 +65,15 @@ module.exports = {
           keyToggleBg1:"#00E0D1",//--Pure cyan (key background, toggle)
         },
         textTheme3: {
-          text1:"#FFE53D",//Very dark grayish yellow
+          text1:"#FFDD00",//Very dark grayish yellow
           text2:"#1B2428",//Very dark blue
+          text3:"#FFDD00",//Very dark grayish yellow
         },
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss'),
+    require('autoprefixer'),
+  ],
 }

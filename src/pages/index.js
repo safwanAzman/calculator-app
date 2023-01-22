@@ -1,11 +1,75 @@
+import { useState } from "react";
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+
+import Keypad from '../components/keypad'
+import Header from '../components/header'
+
+import {themeColor} from '../theme'
+import * as math from 'mathjs'
 
 const inter = Inter({ subsets: ['latin'] })
 
+
 export default function Home() {
+  const [theme ,setTheme] = useState('1')
+  const [input, setInput] = useState('0');
+
+
+  const handleChange = (event) => {
+    setTheme(event.target.value)
+  }
+
+  const calculator = (input, button) => {
+    switch (button) {
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+      case '0':
+      case '.':
+      if(input === '0'){
+          setInput(button);
+      }else{
+          setInput(input + button);
+      }
+        break;
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+        setInput(input.replace(/,/g, '') + ' ' + button + ' ');
+        break;
+      case '=':
+        try {
+          let output = math.evaluate(input.replace(/,/g, ''));
+          setInput(output.toLocaleString('en-US'));
+        } catch (error) {
+          console.log(error);
+          setInput('BAPAK KAU HITAM');
+        }
+        break;
+      case 'C':
+        setInput('0');
+        break;
+      case 'DEL':
+        if(input.length > 0){
+          setInput(input.slice(0, -1));
+        }
+        break;
+      default:
+        break;
+    }
+  }
+  
+  
+
+  
   return (
     <>
       <Head>
@@ -14,9 +78,182 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main  className="h-screen bg-bgTheme1-mainBg flex items-center justify-center ">
-        <h1 className="text-2xl text-white font-bold myFont">CALCULATOR APP SOON...</h1>
-      </main> 
+      <main className={`bg-bgTheme${theme}-mainBg`}>
+        <div className="flex flex-col items-center justify-center h-screen px-2 ">
+          <div className="container max-w-md mx-auto">
+
+            {/* header */}
+            <Header
+              themeIndex={theme} 
+            >
+              <input 
+                type="radio" 
+                id="1" 
+                value="1"
+                name="option" 
+                className="hidden peer" 
+                onClick={handleChange}
+              />
+              <input 
+                  type="radio" 
+                  id="2" 
+                  value="2"
+                  name="option" 
+                  className="hidden peer" 
+                  onClick={handleChange}
+                />
+              <input 
+                  type="radio" 
+                  id="3" 
+                  value="3"
+                  name="option" 
+                  className="hidden peer" 
+                  onClick={handleChange}
+                />
+            </Header>
+
+            {/* input screen */}
+            <div className="mt-4">
+              <div className={`w-full bg-bgTheme${theme}-screenBg h-24 pt-[1.8rem] rounded-md flex  justify-end px-6 py-4 shadow-lg overflow-auto`}>
+                <div>
+                  <h1 className={`text-5xl myFont text-textTheme${theme}-text3`}>
+                    {input}
+                  </h1>
+                  
+                </div>
+                
+              </div>
+            </div>
+
+            {/* keypad */}
+            <div className="mt-4">
+              <div className={`w-full bg-bgTheme${theme}-keypadBg rounded-md px-4 md:px-6 py-6`}>
+
+                <div className="grid grid-cols-4 gap-5">
+                  <Keypad 
+                    type="num"
+                    text="7" 
+                    themeIndex={theme}
+                    onClick={() => calculator(input, '7')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="8" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '8')} 
+                    />
+                  <Keypad
+                    type="num"
+                    text="9" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '9')} 
+                    />
+                  <Keypad
+                    type="func"
+                    text="DEL" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, 'DEL')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="4" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '4')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="5" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '5')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="6" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '6')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="+" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '+')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="1" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '1')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="2" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '2')}
+                  />
+                  <Keypad
+                    type="num"
+                    text="3" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '3')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="-" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '-')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="." 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '.')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="0" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '0')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="/" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '/')} 
+                  />
+                  <Keypad
+                    type="num"
+                    text="*" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '*')} 
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-5 mt-6">
+                  <Keypad
+                    type="func"
+                    text="RESET" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, 'C')} 
+                  />
+                  <Keypad
+                    type="equal"
+                    text="=" 
+                    themeIndex={theme} 
+                    onClick={() => calculator(input, '=')} 
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+
+        <footer className="fixed bottom-0 w-full p-2 bg-black ">
+          <div className="flex items-center justify-center text-xs text-white">
+            Challenge by <a className="px-1 text-teal-500 border-b-2 border-teal-500" href="https://www.frontendmentor.io/">Frontend Mentor.</a>
+            Coded by <a className="pl-1 text-teal-500 border-b-2 border-teal-500" href="https://portfolio-v2-self.vercel.app/"> SafwanAzman.</a>
+          </div>
+        </footer>
+      </main>
     </>
   )
 }
