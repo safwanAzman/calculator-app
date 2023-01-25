@@ -8,7 +8,7 @@ export default function header({themeIndex ,children}) {
             <h1 className={`myFont text-[32px] text-textTheme${themeIndex}-text3`}>calc</h1>
         </div>
         <div className="flex items-end space-x-4">
-            <h6 className={`myFont text-base text-textTheme${themeIndex}-text3`}>THEME</h6>
+            <h1 className={`myFont text-base text-textTheme${themeIndex}-text3`}>THEME</h1>
             <div className="relative flex flex-col items-center space-x-1">
                 <div className={`text-textTheme${themeIndex}-text3 myFont text-sm `}>
                     <label htmlFor="1" className={'w-5  absolute left-1 cursor-pointer h-12 -top-5 text-center' }>1</label>

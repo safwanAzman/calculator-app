@@ -6,21 +6,21 @@ export default function keypad({text , themeIndex ,type,onClick,}) {
         value={text} 
         onClick={onClick}
         className={`bg-keysTheme${themeIndex}-keyBg2 myFont text-4xl flex items-center justify-center py-2 rounded-lg shadow-3xl shadow-keysTheme${themeIndex}-keyShadow3 text-textTheme${themeIndex}-text1 transition hover:scale-90`}>
-        <p className="pt-2">{text}</p>
+        <span className="pt-2">{text}</span>
     </button>
     : type == "func" ? 
     <button
         value={text} 
         onClick={onClick}
         className={`bg-keysTheme${themeIndex}-keyBg1 myFont text-2xl flex items-center justify-center py-2 rounded-lg shadow-3xl shadow-keysTheme${themeIndex}-keyShadow1 text-white transition hover:scale-90`}>
-        <p className="pt-2">{text}</p>
+        <span className="pt-2">{text}</span>
     </button>
     : type == "equal" ? 
     <button
         value={text} 
         onClick={onClick}
         className={`bg-keysTheme${themeIndex}-keyToggleBg1 myFont text-4xl flex items-center justify-center py-2 rounded-lg shadow-3xl shadow-keysTheme${themeIndex}-keyShadow2 text-textTheme${themeIndex}-text2 transition hover:scale-90`}>
-        <p className="pt-2">{text}</p>
+        <span className="pt-2">{text}</span>
     </button>
     :null }
     </>
